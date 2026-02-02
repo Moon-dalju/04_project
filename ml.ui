@@ -1,0 +1,912 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>848</width>
+    <height>1015</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* =======================================================
+   1. 전체 배경 설정 (아이보리 톤)
+   ======================================================= */
+QWidget#Form, QWidget#centralwidget, QFrame#frame_main {
+    background-color: #FDFBF7;
+}
+
+/* 기본 글꼴 설정 */
+QLabel {
+    color: #333333; 
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    font-size: 14px;
+}
+
+/* =======================================================
+   2. [수정됨] 사이드바 스타일 (범위 제한)
+   ======================================================= */
+QFrame#frame_sidebar {
+    background-color: #F0EFE9;
+    border-right: 1px solid #D1D1D1;
+}
+
+/* ★ 중요: 사이드바 안에 있는 버튼만 투명하게 만듭니다! */
+QFrame#frame_sidebar QPushButton {
+    background-color: transparent;
+    color: #333333;
+    border: none;
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QFrame#frame_sidebar QPushButton:hover {
+    background-color: #E6E3DA;
+    color: #000000;
+}
+
+QFrame#frame_sidebar QPushButton:checked {
+    background-color: #E6E3DA;
+    color: #2c3e50;
+    border-left: 5px solid #2c3e50;
+}
+
+/* =======================================================
+   3. [수정됨] 입력창 &amp; 그룹박스 (흰색 카드 스타일)
+   ======================================================= */
+/* 그룹박스 자체를 '흰색 카드'로 만들어서 라벨을 일일이 칠할 필요 없게 함 */
+QGroupBox {
+    background-color: #FFFFFF;  /* 흰색 배경 */
+    border: 1px solid #DDDDDD;  /* 연한 테두리 */
+    border-radius: 8px;         /* 둥근 모서리 */
+    margin-top: 25px;           /* 제목 공간 확보 */
+    font-weight: bold;
+    color: #2c3e50;             /* 제목 색상 */
+}
+
+/* 그룹박스 제목 위치 */
+QGroupBox::title {
+    subcontrol-origin: margin;
+    left: 10px;
+    padding: 0 5px;
+}
+
+/* 입력창(SpinBox) 스타일 */
+QDoubleSpinBox {
+    background-color: #F9F9F9; /* 아주 연한 회색 */
+    border: 1px solid #CCCCCC;
+    border-radius: 4px;
+    padding: 4px;
+}
+QDoubleSpinBox:focus {
+    border: 1px solid #3366FF; /* 클릭했을 때 파란 테두리 */
+    background-color: #FFFFFF;
+}
+
+/* =======================================================
+   4. [신규] '예측 실행' 버튼 스타일 (btn_predict)
+   ======================================================= */
+/* 파란색으로 강조된 버튼 */
+QPushButton#btn_predict {
+    background-color: #3366FF; /* 쨍한 파란색 */
+    color: #FFFFFF;            /* 흰색 글자 */
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: bold;
+    padding: 12px;
+}
+
+QPushButton#btn_predict:hover {
+    background-color: #254EDB; /* 마우스 올리면 진해짐 */
+}
+
+QPushButton#btn_predict:pressed {
+    background-color: #1939B7; /* 누르면 더 진해짐 */
+    padding-top: 14px;         /* 눌리는 효과 */
+}
+
+/* =======================================================
+   5. [신규] 오른쪽 결과창 (진성/가성 등) 카드 스타일
+   ======================================================= */
+/* 오른쪽의 작은 그룹박스들도 흰색 카드로 통일 */
+QGroupBox#groupBox_3, QGroupBox#groupBox_4, QGroupBox#groupBox_5, QGroupBox#groupBox_6 {
+    background-color: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 12px;
+}
+
+/* 결과 텍스트가 들어갈 라벨 (강조) */
+/* 결과창 안에 있는 라벨들만 글자를 키웁니다 */
+QGroupBox#groupBox_3 QLabel, QGroupBox#groupBox_4 QLabel, 
+QGroupBox#groupBox_5 QLabel, QGroupBox#groupBox_6 QLabel {
+    font-size: 18px;
+    font-weight: bold;
+    color: #333333;
+    background-color: transparent; /* 배경은 투명하게 (그룹박스가 흰색이니까) */
+    border: none;
+}</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout" stretch="0,9">
+   <item>
+    <widget class="QFrame" name="frame">
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>결함 예측</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item>
+    <widget class="QFrame" name="frame_2">
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_2">
+      <item row="0" column="0">
+       <widget class="QFrame" name="frame_3">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="2" column="0">
+          <widget class="QPushButton" name="btn_predict">
+           <property name="text">
+            <string>btn_predict</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QGroupBox" name="groupBox">
+           <property name="title">
+            <string>입력 피처 설정</string>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_2">
+            <item>
+             <widget class="QFrame" name="frame_5">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_3">
+               <item>
+                <widget class="QLabel" name="label_2">
+                 <property name="text">
+                  <string>Endpt A</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="EndptA">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>Pressure</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="Pressure">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_4">
+                 <property name="text">
+                  <string>Vat Valve</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="VatValve">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_5">
+                 <property name="text">
+                  <string>Cl2 Flow</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="Cl2Flow">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_6">
+                 <property name="text">
+                  <string>BCl3 Flow</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="BCl3Flow">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>He Press</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="HePress">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_9">
+                 <property name="text">
+                  <string>TextLabel</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="doubleSpinBox_8">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_10">
+                 <property name="text">
+                  <string>wafer_names</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="wafer_names">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_11">
+                 <property name="text">
+                  <string>Step Number</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="StepNumber">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_22">
+                 <property name="text">
+                  <string>Time</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="Time">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_23">
+                 <property name="text">
+                  <string>fault_name</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="fault_name">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_6">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>RF Load</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFLoad">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_12">
+                 <property name="text">
+                  <string>RF Pwr</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFPwr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_13">
+                 <property name="text">
+                  <string>RF Btm Pwr</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFBtmPwr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_14">
+                 <property name="text">
+                  <string>RF Btm Rfl Pwr:</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFBtmRflPwr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_25">
+                 <property name="text">
+                  <string>RF Tuner</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFTuner">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>RF Impedance</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFImpedance">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_16">
+                 <property name="text">
+                  <string>RF Phase Err</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="RFPhaseErr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_17">
+                 <property name="text">
+                  <string>TCP Load</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPLoad">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_18">
+                 <property name="text">
+                  <string>TCP Tuner</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPTuner">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_19">
+                 <property name="text">
+                  <string>TCP Top Pwr</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPTopPwr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_20">
+                 <property name="text">
+                  <string>TCP Rfl Pwr</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPRflPwr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_21">
+                 <property name="text">
+                  <string>TCP Impedance</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPImpedance">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_24">
+                 <property name="text">
+                  <string>TCP Phase Err</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QDoubleSpinBox" name="TCPPhaseErr">
+                 <property name="buttonSymbols">
+                  <enum>QAbstractSpinBox::ButtonSymbols::NoButtons</enum>
+                 </property>
+                 <property name="decimals">
+                  <number>2</number>
+                 </property>
+                 <property name="minimum">
+                  <double>-999999.000000000000000</double>
+                 </property>
+                 <property name="maximum">
+                  <double>999999.000000000000000</double>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QFrame" name="frame_4">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_6">
+         <item>
+          <widget class="QGroupBox" name="groupBox_2">
+           <property name="title">
+            <string>머신러닝 결과 및 공정 상태</string>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="13,1">
+            <item>
+             <widget class="QFrame" name="frame_7">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_9">
+               <item>
+                <widget class="QFrame" name="frame_11">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <item>
+                   <widget class="QFrame" name="frame_12">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_10">
+                     <item>
+                      <widget class="QGroupBox" name="groupBox_3">
+                       <property name="title">
+                        <string>양품 불량품 예측</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QGroupBox" name="groupBox_4">
+                       <property name="title">
+                        <string>불량품 확률</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_13">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_11">
+                     <item>
+                      <widget class="QGroupBox" name="groupBox_5">
+                       <property name="title">
+                        <string>결함 유형</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QGroupBox" name="groupBox_6">
+                       <property name="title">
+                        <string>결함 유형 확률</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_10">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_8">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_8">
+               <item>
+                <widget class="QPushButton" name="pushButton">
+                 <property name="text">
+                  <string>PushButton</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_9">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>

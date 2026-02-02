@@ -1,0 +1,879 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Form</class>
+ <widget class="QWidget" name="Form">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>972</width>
+    <height>903</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Form</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true">/* =======================================================
+   1. 전체 배경 및 공통 설정
+   ======================================================= */
+/* 전체 배경: 눈이 편안한 아이보리 */
+QMainWindow {
+    background-color: #FDFBF7;
+}
+
+/* 메인 화면 영역 배경 */
+QFrame#frame_main {
+    background-color: #FDFBF7;
+}
+
+/* 기본 글꼴 및 색상 */
+QLabel {
+    color: #333333; /* 기본 글자: 진한 회색 */
+    font-family: 'Segoe UI', 'Malgun Gothic', sans-serif;
+    font-size: 14px;
+}
+
+/* =======================================================
+   2. 사이드바 스타일 (유지)
+   ======================================================= */
+QFrame#frame_sidebar {
+    background-color: #F0EFE9;
+    border-right: 1px solid #D1D1D1;
+}
+
+QPushButton {
+    background-color: transparent;
+    color: #333333;
+    border: none;
+    padding: 15px;
+    text-align: left;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+QPushButton:hover {
+    background-color: #E6E3DA;
+    color: #000000;
+}
+
+QPushButton:checked {
+    background-color: #E6E3DA;
+    color: #2c3e50;
+    border-left: 5px solid #2c3e50;
+}
+
+/* =======================================================
+   3. [삭제됨] 콘텐츠 카드 디자인
+   ======================================================= */
+/* 예전에는 여기서 큰 박스를 흰색으로 칠했지만, 
+   이제는 '제목'만 칠하기 위해 이 부분의 배경색 코드는 다 뺐습니다. 
+   대신 아래 4번 항목에서 제목을 꾸밉니다. */
+
+
+/* =======================================================
+   4. [수정됨] 제목 라벨 스타일 (제목 칸만 흰색 박스로!)
+   ======================================================= */
+/* Press, RF Pwr 등 제목 글자가 있는 '라벨 위젯' 자체에만
+   흰색 배경과 테두리를 줍니다. */
+   
+QLabel#label, QLabel#label_2, QLabel#label_3, QLabel#label_7, 
+QLabel#label_8, QLabel#label_13, QLabel#label_14, 
+QLabel#label_15, QLabel#label_16, QLabel#label_17, QLabel#label_18,
+QLabel#label_19, QLabel#label_20, QLabel#label_21, 
+QLabel#label_4, QLabel#label_5, QLabel#label_6 {
+    
+    background-color: #FFFFFF;  /* 배경을 흰색으로! */
+    color: #333333;             /* 글자는 진한 회색 */
+    
+    /* 박스 모양 만들기 */
+    border: 1px solid #DDDDDD;  /* 연한 테두리 */
+    border-radius: 6px;         /* 모서리 살짝 둥글게 */
+    padding: 8px 12px;          /* 글자 주변 여백을 줘서 박스처럼 보이게 */
+    
+    font-weight: bold;
+    font-size: 14px;
+    min-height: 24px;           /* 높이를 줘서 너무 납작하지 않게 */
+}
+
+/* =======================================================
+   5. 상태 알람 라벨 (심각, 경고, 주의) - 유지
+   ======================================================= */
+
+/* 심각 (label_9) - 빨강 */
+QLabel#label_9 {
+    background-color: #E74C3C;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+}
+
+/* 경고 (label_10) - 오렌지 */
+QLabel#label_10 {
+    background-color: #F39C12;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+}
+
+/* 주의 (label_11) - 노랑 */
+QLabel#label_11 {
+    background-color: #F1C40F;
+    color:  white;    /*#333333;  검정하고 싶으면 */
+    border: none;
+    border-radius: 4px;
+    padding: 5px;
+    font-weight: bold;
+    qproperty-alignment: AlignCenter;
+}</string>
+  </property>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QFrame" name="frame_main">
+     <property name="frameShape">
+      <enum>QFrame::Shape::StyledPanel</enum>
+     </property>
+     <property name="frameShadow">
+      <enum>QFrame::Shadow::Raised</enum>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_6" stretch="0,0,0">
+      <item>
+       <widget class="QFrame" name="top_frame">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,1,3">
+         <item>
+          <widget class="QFrame" name="frame_11">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_7" stretch="1,5">
+            <item>
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>Press</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_5">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_4">
+               <item>
+                <widget class="QProgressBar" name="progressBar">
+                 <property name="value">
+                  <number>24</number>
+                 </property>
+                 <property name="textVisible">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_24">
+                 <property name="text">
+                  <string>TextLabel</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_9">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_8" stretch="1,5">
+            <item>
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>RF Pwr</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_15">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_5">
+               <item>
+                <widget class="QProgressBar" name="progressBar_2">
+                 <property name="value">
+                  <number>24</number>
+                 </property>
+                 <property name="textVisible">
+                  <bool>false</bool>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QLabel" name="label_25">
+                 <property name="text">
+                  <string>TextLabel</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_10">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_9" stretch="1,2">
+            <item>
+             <widget class="QFrame" name="frame_19">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_10">
+               <item>
+                <widget class="QLabel" name="label_3">
+                 <property name="text">
+                  <string>생산라인요약리포트</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_16">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_5" stretch="0">
+               <item>
+                <widget class="QFrame" name="frame">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_3">
+                  <item>
+                   <widget class="QFrame" name="frame_4">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout">
+                     <item>
+                      <widget class="QLabel" name="label_4">
+                       <property name="text">
+                        <string>생산 수량</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_12">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_3">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_2">
+                     <item>
+                      <widget class="QLabel" name="label_5">
+                       <property name="text">
+                        <string>수율</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_22">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_2">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_3">
+                     <item>
+                      <widget class="QLabel" name="label_6">
+                       <property name="text">
+                        <string>평균 불량 수</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_23">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="mid_frame">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_6" stretch="4,1">
+         <item>
+          <widget class="QFrame" name="frame_17">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_16" stretch="1,4">
+            <item>
+             <widget class="QFrame" name="frame_31">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_17">
+               <item>
+                <widget class="QLabel" name="label_7">
+                 <property name="text">
+                  <string>센서 데이터</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QComboBox" name="comboBox"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_30">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_28">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_19" stretch="1,6">
+            <item>
+             <widget class="QFrame" name="frame_34">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_24">
+               <item>
+                <widget class="QLabel" name="label_8">
+                 <property name="text">
+                  <string>실시간 예측 결과 알람 리포트</string>
+                 </property>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_36">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_9">
+               <item>
+                <widget class="QFrame" name="frame_41">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QHBoxLayout" name="horizontalLayout_4">
+                  <item>
+                   <widget class="QFrame" name="frame_6">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_11">
+                     <item>
+                      <widget class="QLabel" name="label_9">
+                       <property name="text">
+                        <string>심각</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_10">
+                       <property name="text">
+                        <string>경고</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_11">
+                       <property name="text">
+                        <string>주의</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_7">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_12">
+                     <item>
+                      <widget class="QLabel" name="label_26">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_27">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                     <item>
+                      <widget class="QLabel" name="label_28">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QFrame" name="bot_frame">
+        <property name="frameShape">
+         <enum>QFrame::Shape::StyledPanel</enum>
+        </property>
+        <property name="frameShadow">
+         <enum>QFrame::Shadow::Raised</enum>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_10" stretch="2,2,1">
+         <item>
+          <widget class="QFrame" name="frame_45">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_27" stretch="1,5">
+            <item>
+             <widget class="QLabel" name="label_13">
+              <property name="text">
+               <string>FDC</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_48">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_46">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QHBoxLayout" name="horizontalLayout_11" stretch="4,1">
+            <item>
+             <widget class="QFrame" name="frame_50">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_31" stretch="0,0">
+               <item>
+                <widget class="QLabel" name="label_15">
+                 <property name="text">
+                  <string>EV</string>
+                 </property>
+                </widget>
+               </item>
+               <item>
+                <widget class="QTableWidget" name="tableWidget"/>
+               </item>
+              </layout>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_54">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QVBoxLayout" name="verticalLayout_33" stretch="1,1">
+               <item>
+                <widget class="QFrame" name="frame_59">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_34" stretch="0,2">
+                  <item>
+                   <widget class="QLabel" name="label_17">
+                    <property name="text">
+                     <string>OES</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_62">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_8">
+                     <item>
+                      <widget class="QLabel" name="label_31">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_60">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_35" stretch="0,2">
+                  <item>
+                   <widget class="QLabel" name="label_18">
+                    <property name="text">
+                     <string>RFM</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_63">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QHBoxLayout" name="horizontalLayout_12">
+                     <item>
+                      <widget class="QLabel" name="label_32">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+         <item>
+          <widget class="QFrame" name="frame_47">
+           <property name="frameShape">
+            <enum>QFrame::Shape::StyledPanel</enum>
+           </property>
+           <property name="frameShadow">
+            <enum>QFrame::Shadow::Raised</enum>
+           </property>
+           <layout class="QVBoxLayout" name="verticalLayout_28" stretch="0,5">
+            <item>
+             <widget class="QLabel" name="label_14">
+              <property name="text">
+               <string>RUL</string>
+              </property>
+             </widget>
+            </item>
+            <item>
+             <widget class="QFrame" name="frame_52">
+              <property name="frameShape">
+               <enum>QFrame::Shape::StyledPanel</enum>
+              </property>
+              <property name="frameShadow">
+               <enum>QFrame::Shadow::Raised</enum>
+              </property>
+              <layout class="QHBoxLayout" name="horizontalLayout_13">
+               <item>
+                <widget class="QFrame" name="frame_66">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_39" stretch="0,4">
+                  <item>
+                   <widget class="QLabel" name="label_19">
+                    <property name="text">
+                     <string>EV</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_69">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_14">
+                     <item>
+                      <widget class="QLabel" name="label_33">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_65">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_40" stretch="0,4">
+                  <item>
+                   <widget class="QLabel" name="label_20">
+                    <property name="text">
+                     <string>OES</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_71">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_15">
+                     <item>
+                      <widget class="QLabel" name="label_34">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+               <item>
+                <widget class="QFrame" name="frame_67">
+                 <property name="frameShape">
+                  <enum>QFrame::Shape::StyledPanel</enum>
+                 </property>
+                 <property name="frameShadow">
+                  <enum>QFrame::Shadow::Raised</enum>
+                 </property>
+                 <layout class="QVBoxLayout" name="verticalLayout_41" stretch="0,4">
+                  <item>
+                   <widget class="QLabel" name="label_21">
+                    <property name="text">
+                     <string>RFM</string>
+                    </property>
+                   </widget>
+                  </item>
+                  <item>
+                   <widget class="QFrame" name="frame_73">
+                    <property name="frameShape">
+                     <enum>QFrame::Shape::StyledPanel</enum>
+                    </property>
+                    <property name="frameShadow">
+                     <enum>QFrame::Shadow::Raised</enum>
+                    </property>
+                    <layout class="QVBoxLayout" name="verticalLayout_18">
+                     <item>
+                      <widget class="QLabel" name="label_35">
+                       <property name="text">
+                        <string>TextLabel</string>
+                       </property>
+                      </widget>
+                     </item>
+                    </layout>
+                   </widget>
+                  </item>
+                 </layout>
+                </widget>
+               </item>
+              </layout>
+             </widget>
+            </item>
+           </layout>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
